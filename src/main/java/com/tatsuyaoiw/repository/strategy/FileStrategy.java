@@ -3,26 +3,34 @@ package com.tatsuyaoiw.repository.strategy;
 import com.tatsuyaoiw.entity.Entity;
 
 import java.util.List;
+import java.util.UUID;
 
-public class FileStrategy extends RepositoryStrategy {
+public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 
 	@Override
-	public Entity add(Entity object) {
+	public void init() {
+		// TODO
+	}
+
+	@Override
+	public T add(T entity) {
+		String id = UUID.randomUUID().toString();
+		entity.setId(id);
+		return entity;
+	}
+
+	@Override
+	public List<T> list() {
 		return null;
 	}
 
 	@Override
-	public List list() {
+	public T get(String id) {
 		return null;
 	}
 
 	@Override
-	public Entity get(String id) {
-		return null;
-	}
-
-	@Override
-	public Entity update(Entity object) {
+	public T update(T entity) {
 		return null;
 	}
 

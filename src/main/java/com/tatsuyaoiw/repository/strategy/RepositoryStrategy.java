@@ -6,6 +6,8 @@ import java.util.List;
 
 public abstract class RepositoryStrategy<T extends Entity> {
 
+	public void init() {}
+
 	public abstract T add(T entity);
 
 	public abstract List<T> list();

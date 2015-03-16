@@ -19,6 +19,7 @@ public class CompanyRepository {
 
 	public void init(RepositoryStrategy<Company> strategy) {
 		this.strategy = strategy;
+		this.strategy.init();
 	}
 
 	public Company add(Company company) {

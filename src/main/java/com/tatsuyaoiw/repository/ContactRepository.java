@@ -19,6 +19,7 @@ public class ContactRepository {
 
 	public void init(RepositoryStrategy<Contact> strategy) {
 		this.strategy = strategy;
+		this.strategy.init();
 	}
 
 	public Contact add(Contact contact) {
