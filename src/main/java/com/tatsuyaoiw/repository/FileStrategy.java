@@ -70,6 +70,14 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 		}
 	}
 
+	private void deleteFile(File file) {
+		if (file.exists()) {
+			if (!file.delete()) {
+				throw new IllegalStateException("Unable to delete file: " + file);
+			}
+		}
+	}
+
 	@Override
 	T add(T entity) {
 		String id = UUID.randomUUID().toString();
