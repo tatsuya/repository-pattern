@@ -28,11 +28,15 @@ public class CompanyRepository {
 		return strategy.list();
 	}
 
+	public Company get(String id) {
+		return strategy.get(id);
+	}
+
 	public Company update(Company company) {
 		return strategy.update(company);
 	}
 
-	public boolean delete(String id) {
+	public boolean remove(String id) {
 		return strategy.remove(id);
 	}
 

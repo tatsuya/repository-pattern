@@ -61,12 +61,15 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 		}
 	}
 
-	private void saveFile(String id, String json) {
-		File file = new File(collection, id);
+	private File createFile(String id) {
+		return new File(collection, id);
+	}
+
+	private void saveFile(File file, String content) {
 		try {
-			Files.write(file.toPath(), json.getBytes(), StandardOpenOption.CREATE);
+			Files.write(file.toPath(), content.getBytes(), StandardOpenOption.CREATE);
 		} catch (IOException e) {
-			throw new IllegalStateException("Unable to create file to " + collection, e);
+			throw new IllegalStateException("Unable to create file: " + file, e);
 		}
 	}
 
@@ -84,7 +87,8 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 		entity.setId(id);
 
 		String json = JsonUtils.serialize(entity);
-		saveFile(id, json);
+		File file = createFile(id);
+		saveFile(file, json);
 
 		storage.put(id, entity);
 		return entity;
@@ -103,7 +107,8 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	@Override
 	T update(T entity) {
 		String json = JsonUtils.serialize(entity);
-		saveFile(entity.getId(), json);
+		File file = createFile(entity.getId());
+		saveFile(file, json);
 
 		storage.put(entity.getId(), entity);
 		return entity;
@@ -111,7 +116,9 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 
 	@Override
 	boolean remove(String id) {
-		return false;
+		File file = createFile(id);
+		deleteFile(file);
+		return storage.remove(id) != null;
 	}
 
 }
