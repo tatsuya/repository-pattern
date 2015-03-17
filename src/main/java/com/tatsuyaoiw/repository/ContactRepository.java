@@ -1,7 +1,6 @@
 package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Contact;
-import com.tatsuyaoiw.repository.strategy.RepositoryStrategy;
 
 import java.util.List;
 
@@ -19,7 +18,6 @@ public class ContactRepository {
 
 	public void init(RepositoryStrategy<Contact> strategy) {
 		this.strategy = strategy;
-		this.strategy.init();
 	}
 
 	public Contact add(Contact contact) {
@@ -28,6 +26,10 @@ public class ContactRepository {
 
 	public List<Contact> list() {
 		return strategy.list();
+	}
+
+	public Contact update(Contact contact) {
+		return strategy.update(contact);
 	}
 
 	public boolean delete(String id) {

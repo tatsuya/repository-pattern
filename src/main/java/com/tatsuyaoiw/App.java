@@ -4,21 +4,25 @@ import com.tatsuyaoiw.entity.Company;
 import com.tatsuyaoiw.entity.Contact;
 import com.tatsuyaoiw.repository.CompanyRepository;
 import com.tatsuyaoiw.repository.ContactRepository;
-import com.tatsuyaoiw.repository.strategy.InMemoryStrategy;
-import com.tatsuyaoiw.repository.strategy.RepositoryStrategy;
+import com.tatsuyaoiw.repository.FileStrategy;
+import com.tatsuyaoiw.repository.RepositoryStrategy;
+
+import java.util.List;
 
 public class App {
 
 	public static void main(String[] args) {
-		CompanyRepository companyRepo = initCompanyRepository(new InMemoryStrategy<Company>());
-		addCompanies(companyRepo);
+		CompanyRepository companies = initCompanyRepository(new FileStrategy<Company>(Company.class, "companies"));
+		addCompanies(companies);
+		updateCompanies(companies);
 
-		printCompanies(companyRepo);
+		printCompanies(companies);
 
-		ContactRepository contactRepo = initContactRepository(new InMemoryStrategy<Contact>());
-		addContacts(contactRepo);
+		ContactRepository contacts = initContactRepository(new FileStrategy<Contact>(Contact.class, "contacts"));
+		addContacts(contacts);
+		updateContacts(contacts);
 
-		printContacts(contactRepo);
+		printContacts(contacts);
 	}
 
 	private static CompanyRepository initCompanyRepository(RepositoryStrategy<Company> strategy) {
@@ -32,6 +36,13 @@ public class App {
 		google.setName("Google");
 		google.setWebsite("google.com");
 		repo.add(google);
+	}
+
+	private static void updateCompanies(CompanyRepository repo) {
+		List<Company> companies = repo.list();
+		Company company = companies.get(0);
+		company.setWebsite("google.co.jp");
+		repo.update(company);
 	}
 
 	private static void printCompanies(CompanyRepository repo) {
@@ -58,6 +69,14 @@ public class App {
 		sergey.setFirstName("Sergey");
 		sergey.setLastName("Brin");
 		repo.add(sergey);
+	}
+
+	private static void updateContacts(ContactRepository repo) {
+		List<Contact> contacts = repo.list();
+		Contact contact = contacts.get(0);
+		contact.setFirstName("Eric");
+		contact.setLastName("Schmidt");
+		repo.update(contact);
 	}
 
 	private static void printContacts(ContactRepository repo) {

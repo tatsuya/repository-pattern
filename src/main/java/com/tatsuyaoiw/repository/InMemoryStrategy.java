@@ -1,4 +1,4 @@
-package com.tatsuyaoiw.repository.strategy;
+package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Entity;
 
@@ -13,7 +13,7 @@ public class InMemoryStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	private final Map<String, T> storage = new ConcurrentHashMap<String, T>();
 
 	@Override
-	public T add(T entity) {
+	T add(T entity) {
 		String id = UUID.randomUUID().toString();
 		entity.setId(id);
 		storage.put(id, entity);
@@ -21,23 +21,23 @@ public class InMemoryStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	public List<T> list() {
+	List<T> list() {
 		return new ArrayList<T>(storage.values());
 	}
 
 	@Override
-	public T get(String id) {
+	T get(String id) {
 		return storage.get(id);
 	}
 
 	@Override
-	public T update(T entity) {
+	T update(T entity) {
 		storage.put(entity.getId(), entity);
-		return null;
+		return entity;
 	}
 
 	@Override
-	public boolean remove(String id) {
+	boolean remove(String id) {
 		return storage.remove(id) != null;
 	}
 }

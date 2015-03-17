@@ -1,7 +1,6 @@
 package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Company;
-import com.tatsuyaoiw.repository.strategy.RepositoryStrategy;
 
 import java.util.List;
 
@@ -19,7 +18,6 @@ public class CompanyRepository {
 
 	public void init(RepositoryStrategy<Company> strategy) {
 		this.strategy = strategy;
-		this.strategy.init();
 	}
 
 	public Company add(Company company) {
@@ -28,6 +26,10 @@ public class CompanyRepository {
 
 	public List<Company> list() {
 		return strategy.list();
+	}
+
+	public Company update(Company company) {
+		return strategy.update(company);
 	}
 
 	public boolean delete(String id) {
