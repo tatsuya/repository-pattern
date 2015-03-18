@@ -18,7 +18,7 @@ public class JsonUtils {
 		try {
 			return MAPPER.writeValueAsString(value);
 		} catch (JsonProcessingException e) {
-			throw new IllegalArgumentException("Failed to serialize object to json");
+			throw new IllegalArgumentException("Failed to serialize object to json", e);
 		}
 	}
 
@@ -26,7 +26,7 @@ public class JsonUtils {
 		try {
 			return MAPPER.readValue(json, clazz);
 		} catch (IOException e) {
-			throw new IllegalArgumentException("Failed to parse json: " + json + " to object: " + clazz.getName());
+			throw new IllegalArgumentException("Failed to parse json: " + json + " to object: " + clazz.getName(), e);
 		}
 	}
 
