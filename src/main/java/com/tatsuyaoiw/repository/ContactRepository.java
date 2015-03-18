@@ -2,11 +2,7 @@ package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Contact;
 
-import java.util.List;
-
-public class ContactRepository {
-
-	private RepositoryStrategy<Contact> strategy;
+public class ContactRepository extends Repository<Contact> {
 
 	private static final ContactRepository INSTANCE = new ContactRepository();
 
@@ -15,25 +11,5 @@ public class ContactRepository {
 	}
 
 	private ContactRepository() {}
-
-	public void init(RepositoryStrategy<Contact> strategy) {
-		this.strategy = strategy;
-	}
-
-	public Contact add(Contact contact) {
-		return strategy.add(contact);
-	}
-
-	public List<Contact> list() {
-		return strategy.list();
-	}
-
-	public Contact update(Contact contact) {
-		return strategy.update(contact);
-	}
-
-	public boolean delete(String id) {
-		return strategy.remove(id);
-	}
 
 }

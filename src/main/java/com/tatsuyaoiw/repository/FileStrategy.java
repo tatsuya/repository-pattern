@@ -22,7 +22,7 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	private final Map<String, T> storage = new HashMap<String, T>();
 
 	public FileStrategy(Class<T> type) {
-		this(type, Long.toString(System.currentTimeMillis()));
+		this(type, UUID.randomUUID().toString());
 	}
 
 	public FileStrategy(Class<T> type, String collection) {
