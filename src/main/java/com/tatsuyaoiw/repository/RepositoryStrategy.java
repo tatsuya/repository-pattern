@@ -15,4 +15,5 @@ public abstract class RepositoryStrategy<T extends Entity> {
 	abstract T update(T entity);
 
 	abstract boolean remove(String id);
+
 }

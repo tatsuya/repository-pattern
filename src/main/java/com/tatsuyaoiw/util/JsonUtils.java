@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 
 public class JsonUtils {
+
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 
 	static {
@@ -28,4 +29,5 @@ public class JsonUtils {
 			throw new IllegalArgumentException("Failed to parse json: " + json + " to object: " + clazz.getName());
 		}
 	}
+
 }

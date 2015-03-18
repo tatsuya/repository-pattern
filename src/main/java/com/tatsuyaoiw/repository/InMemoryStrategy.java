@@ -40,4 +40,5 @@ public class InMemoryStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	boolean remove(String id) {
 		return storage.remove(id) != null;
 	}
+
 }
