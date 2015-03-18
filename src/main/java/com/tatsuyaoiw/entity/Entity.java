@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.entity;
 
-public class Entity {
+public abstract class Entity {
 
 	private String id;
 
