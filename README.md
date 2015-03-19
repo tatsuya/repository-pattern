@@ -2,9 +2,9 @@
 
 Sample implementation of [Repository Pattern] defined in [Patterns of Enterprise Application Architecture].
 
-# Implementation Details
+## Implementation Details
 
-## Entity
+### Entity
 
 In this sample the following two types of entities are implemented.
 
@@ -13,14 +13,14 @@ In this sample the following two types of entities are implemented.
 
 Both of entities inherit from abstract Entity class. The Entity class has only one field "id" represents the unique identifier of each entity.
 
-## Repository
+### Repository
 
 The repository represents the collection of entities.
 
 - CompanyRepository - Collection of company entity.
 - ContactRepository - Collection of contact entity.
 
-## Repository Strategy
+### Repository Strategy
 
 There are three types of repository strategies are implemented.
 
