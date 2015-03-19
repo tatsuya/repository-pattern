@@ -30,9 +30,9 @@ The repository represents the collection of entities.
 
 There are three types of repository strategies are implemented.
 
-- InMemoryStrategy - On memory database
-- FileStrategy - Use file system as persistent data storage
-- MongoStrategy - Use MongoDB database
+- InMemoryStrategy - Queries the in-memory collection objects
+- FileStrategy - Queries the files in local filesystem
+- MongoStrategy - Queries the MongoDB
 
 
 [Repository Pattern]: http://martinfowler.com/eaaCatalog/repository.html
