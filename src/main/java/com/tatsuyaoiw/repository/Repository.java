@@ -1,6 +1,7 @@
 package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Entity;
+import com.tatsuyaoiw.strategy.RepositoryStrategy;
 
 import java.util.List;
 

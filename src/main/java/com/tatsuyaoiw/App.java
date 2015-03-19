@@ -4,8 +4,8 @@ import com.tatsuyaoiw.entity.Company;
 import com.tatsuyaoiw.entity.Contact;
 import com.tatsuyaoiw.repository.CompanyRepository;
 import com.tatsuyaoiw.repository.ContactRepository;
-import com.tatsuyaoiw.repository.FileStrategy;
-import com.tatsuyaoiw.repository.RepositoryStrategy;
+import com.tatsuyaoiw.strategy.FileStrategy;
+import com.tatsuyaoiw.strategy.RepositoryStrategy;
 
 import java.util.List;
 

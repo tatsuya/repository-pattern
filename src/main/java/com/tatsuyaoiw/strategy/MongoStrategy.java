@@ -1,4 +1,4 @@
-package com.tatsuyaoiw.repository;
+package com.tatsuyaoiw.strategy;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -15,7 +15,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MongoStrategy<T extends Entity> extends RepositoryStrategy<T> {
+public class MongoStrategy<T extends Entity> implements RepositoryStrategy<T> {
 
 	private final Class<T> type;
 	private final String db;
@@ -41,7 +41,7 @@ public class MongoStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	T add(T entity) {
+	public T add(T entity) {
 		BasicDBObject doc = (BasicDBObject) JSON.parse(JsonUtils.serialize(entity));
 		getCollection().insert(doc);
 		entity.setId(doc.getString("_id"));
@@ -49,7 +49,7 @@ public class MongoStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	List<T> list() {
+	public List<T> list() {
 		List<T> entities = new ArrayList<T>();
 		DBCursor cursor = getCollection().find();
 		try {
@@ -66,7 +66,7 @@ public class MongoStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	T get(String id) {
+	public T get(String id) {
 		T entity = null;
 		BasicDBObject query =  new BasicDBObject("_id", new ObjectId(id));
 		DBCursor cursor = getCollection().find(query);
@@ -83,7 +83,7 @@ public class MongoStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	T update(T entity) {
+	public T update(T entity) {
 		BasicDBObject query = new BasicDBObject("_id", new ObjectId(entity.getId()));
 		BasicDBObject doc = (BasicDBObject) JSON.parse(JsonUtils.serialize(entity));
 		getCollection().update(query, doc);
@@ -92,7 +92,7 @@ public class MongoStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	boolean remove(String id) {
+	public boolean remove(String id) {
 		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
 		WriteResult result = getCollection().remove(query);
 		return result.getN() != 0;

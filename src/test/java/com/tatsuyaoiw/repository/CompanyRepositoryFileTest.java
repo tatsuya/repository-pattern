@@ -1,6 +1,7 @@
 package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Company;
+import com.tatsuyaoiw.strategy.FileStrategy;
 import org.junit.Test;
 
 import java.util.List;

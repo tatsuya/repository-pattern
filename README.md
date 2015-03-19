@@ -34,6 +34,7 @@ There are three types of repository strategies are implemented.
 - FileStrategy - Queries the files in local filesystem
 - MongoStrategy - Queries the MongoDB
 
+Each strategy implements the RepositoryStrategy interface, which exposes general CRUD methods.
 
 [Repository Pattern]: http://martinfowler.com/eaaCatalog/repository.html
 [Patterns of Enterprise Application Architecture]: http://martinfowler.com/books/eaa.html

@@ -1,6 +1,7 @@
 package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Company;
+import com.tatsuyaoiw.strategy.MongoStrategy;
 import org.junit.Ignore;
 import org.junit.Test;
 

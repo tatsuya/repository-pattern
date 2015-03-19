@@ -1,4 +1,4 @@
-package com.tatsuyaoiw.repository;
+package com.tatsuyaoiw.strategy;
 
 import com.tatsuyaoiw.entity.Entity;
 import com.tatsuyaoiw.util.JsonUtils;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
+public class FileStrategy<T extends Entity> implements RepositoryStrategy<T> {
 
 	private static final File TMP_DIR = new File(System.getProperty("java.io.tmpdir"));
 	private final Class<T> type;
@@ -82,7 +82,7 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	T add(T entity) {
+	public T add(T entity) {
 		String id = UUID.randomUUID().toString();
 		entity.setId(id);
 
@@ -95,17 +95,17 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	List<T> list() {
+	public List<T> list() {
 		return new ArrayList<T>(storage.values());
 	}
 
 	@Override
-	T get(String id) {
+	public T get(String id) {
 		return storage.get(id);
 	}
 
 	@Override
-	T update(T entity) {
+	public T update(T entity) {
 		String json = JsonUtils.serialize(entity);
 		File file = createFile(entity.getId());
 		saveFile(file, json);
@@ -115,7 +115,7 @@ public class FileStrategy<T extends Entity> extends RepositoryStrategy<T> {
 	}
 
 	@Override
-	boolean remove(String id) {
+	public boolean remove(String id) {
 		File file = createFile(id);
 		deleteFile(file);
 		return storage.remove(id) != null;
