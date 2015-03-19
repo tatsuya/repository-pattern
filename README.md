@@ -2,6 +2,12 @@
 
 Sample implementation of [Repository Pattern] defined in [Patterns of Enterprise Application Architecture].
 
+Basic ideas are:
+
+- A Repository mediates between the domain and data mapping layers
+- Mapping code is encapsulated behind the Repository
+- Clean separation and on-way dependency between the domain and data mapping layers
+
 ## Implementation Details
 
 ### Entity
