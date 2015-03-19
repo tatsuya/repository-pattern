@@ -12,12 +12,12 @@ Basic ideas are:
 
 ### Entity
 
-In this sample the following two types of entities are implemented.
+In this sample the following two types of entities are used.
 
-- Company - Represents the company contains company name and website
-- Contact - Represents the contact information of employees includes first name and last name.
+- Company - Represents the company contains company name and URL of company website.
+- Contact - Represents the contact information of employee includes first name and last name.
 
-Both of entities inherit from abstract Entity class. The Entity class has only one field "id" represents the unique identifier of each entity.
+Both of entities inherit from abstract class called Entity. The Entity class only has one id field which represents the unique identifier of each entity.
 
 ### Repository
 
