@@ -4,11 +4,17 @@ import com.tatsuyaoiw.entity.Company;
 import com.tatsuyaoiw.strategy.FileStrategy;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class CompanyRepositoryFileTest {
+	private static final File TMP_DIR = new File(System.getProperty("java.io.tmpdir"));
 
 	private static final String NAME_1 = "Google";
 	private static final String WEBSITE_1 = "google.com";
@@ -18,7 +24,7 @@ public class CompanyRepositoryFileTest {
 	@Test
 	public void testAdd() throws Exception {
 		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class));
+		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
 
 		Company google = new Company();
 		google.setName(NAME_1);
@@ -41,7 +47,7 @@ public class CompanyRepositoryFileTest {
 	@Test
 	public void testGet() throws Exception {
 		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class));
+		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
 
 		Company google = new Company();
 		google.setName(NAME_1);
@@ -58,7 +64,7 @@ public class CompanyRepositoryFileTest {
 	@Test
 	public void testUpdate() throws Exception {
 		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class));
+		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
 
 		Company google = new Company();
 		google.setName(NAME_1);
@@ -82,7 +88,7 @@ public class CompanyRepositoryFileTest {
 	@Test
 	public void testRemove() throws Exception {
 		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class));
+		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
 
 		Company google = new Company();
 		google.setName(NAME_1);

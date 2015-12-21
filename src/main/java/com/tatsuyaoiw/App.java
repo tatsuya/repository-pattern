@@ -7,18 +7,20 @@ import com.tatsuyaoiw.repository.ContactRepository;
 import com.tatsuyaoiw.strategy.FileStrategy;
 import com.tatsuyaoiw.strategy.RepositoryStrategy;
 
+import java.io.File;
 import java.util.List;
 
 public class App {
+	private static final File TMP_DIR = new File(System.getProperty("java.io.tmpdir"));
 
 	public static void main(String[] args) {
-		CompanyRepository companies = initCompanyRepository(new FileStrategy<Company>(Company.class, "companies"));
+		CompanyRepository companies = initCompanyRepository(new FileStrategy<Company>(Company.class, TMP_DIR, "companies"));
 		addCompanies(companies);
 		updateCompanies(companies);
 
 		printCompanies(companies);
 
-		ContactRepository contacts = initContactRepository(new FileStrategy<Contact>(Contact.class, "contacts"));
+		ContactRepository contacts = initContactRepository(new FileStrategy<Contact>(Contact.class, TMP_DIR, "contacts"));
 		addContacts(contacts);
 		updateContacts(contacts);
 
