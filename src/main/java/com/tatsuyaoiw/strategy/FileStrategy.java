@@ -17,14 +17,14 @@ import java.util.UUID;
 public class FileStrategy<T extends Entity> implements RepositoryStrategy<T> {
 
 	private final Class<T> type;
-	private final File parentDir;
+	private final File db;
 	private final File collection;
 	private final Map<String, T> storage = new HashMap<String, T>();
 
-	public FileStrategy(Class<T> type, File parentDir, String collection) {
+	public FileStrategy(Class<T> type, File db, String collection) {
 		this.type = type;
-		this.parentDir = parentDir;
-		this.collection = new File(parentDir, collection);
+		this.db = db;
+		this.collection = new File(db, collection);
 
 		readFileStorage();
 	}
@@ -32,11 +32,11 @@ public class FileStrategy<T extends Entity> implements RepositoryStrategy<T> {
 	private void readFileStorage() {
 		if (!collection.exists()) {
 			if (!collection.mkdir()) {
-				throw new IllegalStateException("Failed to create directory to " + parentDir);
+				throw new IllegalStateException("Failed to create directory to " + db);
 			}
 		}
 		if (!collection.isDirectory()) {
-			throw new IllegalStateException("Unable to create directory to " + parentDir + " because file already exists");
+			throw new IllegalStateException("Unable to create directory to " + db + " because file already exists");
 		}
 		File[] files = collection.listFiles();
 		if (files != null) {

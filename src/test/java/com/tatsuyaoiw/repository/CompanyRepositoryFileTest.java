@@ -2,6 +2,7 @@ package com.tatsuyaoiw.repository;
 
 import com.tatsuyaoiw.entity.Company;
 import com.tatsuyaoiw.strategy.FileStrategy;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -14,18 +15,23 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class CompanyRepositoryFileTest {
-	private static final File TMP_DIR = new File(System.getProperty("java.io.tmpdir"));
-
 	private static final String NAME_1 = "Google";
 	private static final String WEBSITE_1 = "google.com";
 	private static final String NAME_2 = "Github";
 	private static final String WEBSITE_2 = "github.com";
 
+	private CompanyRepository repo;
+
+	@Before
+	public void before() throws Exception {
+		File db = new File(System.getProperty("java.io.tmpdir"));
+		String collection = UUID.randomUUID().toString();
+		repo = CompanyRepository.getInstance();
+		repo.init(new FileStrategy<Company>(Company.class, db, collection));
+	}
+
 	@Test
 	public void testAdd() throws Exception {
-		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
-
 		Company google = new Company();
 		google.setName(NAME_1);
 		google.setWebsite(WEBSITE_1);
@@ -46,9 +52,6 @@ public class CompanyRepositoryFileTest {
 
 	@Test
 	public void testGet() throws Exception {
-		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
-
 		Company google = new Company();
 		google.setName(NAME_1);
 		google.setWebsite(WEBSITE_1);
@@ -63,9 +66,6 @@ public class CompanyRepositoryFileTest {
 
 	@Test
 	public void testUpdate() throws Exception {
-		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
-
 		Company google = new Company();
 		google.setName(NAME_1);
 		google.setWebsite(WEBSITE_1);
@@ -87,9 +87,6 @@ public class CompanyRepositoryFileTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CompanyRepository repo = CompanyRepository.getInstance();
-		repo.init(new FileStrategy<Company>(Company.class, TMP_DIR, UUID.randomUUID().toString()));
-
 		Company google = new Company();
 		google.setName(NAME_1);
 		google.setWebsite(WEBSITE_1);
